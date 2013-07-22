@@ -36,3 +36,7 @@ class CodeCollabClient:
         regex = re.compile("Connected as:.*\((.*)\)", re.MULTILINE)
         user = regex.search(data).group(1)
         return user
+    
+    def done(self, reviewid):
+        command = ['ccollab', 'admin', 'review', 'finish', reviewid]
+        subprocess.call(command)
