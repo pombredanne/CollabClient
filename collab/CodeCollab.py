@@ -1,4 +1,5 @@
 import subprocess, re, tempfile
+from getpass import getpass
 
 class CodeCollabClient:
     def create_collab(self, title, overview):
@@ -36,6 +37,12 @@ class CodeCollabClient:
         regex = re.compile("Connected as:.*\((.*)\)", re.MULTILINE)
         user = regex.search(data).group(1)
         return user
+    
+    def login(self):
+        user = raw_input('Enter your Code Collab username: ')
+        passwd = getpass.getpass('Enter your Code Collab password: ')
+        command = ['ccollab', 'login', 'https://code-collab.soma.salesforce.com', user, passwd]
+        subprocess.call(command)
     
     def done(self, reviewid):
         command = ['ccollab', 'admin', 'review', 'finish', reviewid]
