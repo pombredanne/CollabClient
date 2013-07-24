@@ -8,3 +8,6 @@ Wrapper for common commands in code collaborator
 	cc.add_reviewers(reviewid, 'hacker', 'hackreviewer,jobreviewer')
 	
 Pretty much it.
+
+Test
+
