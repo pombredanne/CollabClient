@@ -33,6 +33,10 @@ class CodeCollabClient:
                 command.append('--participant')
                 command.append('reviewer=%s' % reviewer)
         subprocess.call(command)
+        
+    def add_comment(self, reviewid, comment):
+        command = ['ccollab', '--no-browser', 'admin', 'review', 'comment', 'create', reviewid, comment]
+        subprocess.call(command)
 
     def get_current_user(self):
         command = ['ccollab', '--scm', 'none', 'info']
@@ -58,13 +62,13 @@ class CodeCollabClient:
         return self.get_review_data(reviewid, xpath='//reviews/review/general/phase/text()')
     
     def get_review_author(self, reviewid):
-        return self.get_review_data(reviewid, xpath='//reviews/review/participants/participant/[role="Author"]/../login/text()')
+        return self.get_review_data(reviewid, xpath='//reviews/review/participants/participant/role[text()="Author"]/../login/text()')
         
     def get_review_data(self, reviewid, xpath=None):
         command = ['ccollab', 'admin', 'review-xml', reviewid]
         if xpath is not None:
             command.append('--xpath')
-            command.append(filter)
+            command.append(xpath)
         out = subprocess.check_output(command)
         return out
     
