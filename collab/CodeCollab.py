@@ -1,9 +1,15 @@
-import subprocess, re, tempfile
-from getpass import getpass
+import subprocess, re, tempfile, sys
+import getpass
 
 class CodeCollabClient:
     def __init__(self, server='https://code-collab.soma.salesforce.com'):
         self.server=server
+        user = None
+        counter = 0
+        while user is None and counter < 3:
+            user = self.get_current_user()
+            if user is None:
+                self.login()
         
     def create_collab(self, title, overview):
         out = subprocess.check_output(['ccollab', '--no-browser','admin', 'review', 'create', '--title', title, '--custom-field' , 'Overview=%s\n%s' % (title, overview)])
@@ -73,6 +79,7 @@ class CodeCollabClient:
         return out
     
     def login(self):
+        sys.stdin = open('/dev/tty')
         user = raw_input('Enter your Code Collab username: ')
         passwd = getpass.getpass('Enter your Code Collab password: ')
         command = ['ccollab', 'login', self.server, user, passwd]
