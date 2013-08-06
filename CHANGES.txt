@@ -4,3 +4,4 @@ v0.1.2, 22 July 2013 -- fixed silly build error
 v0.1.3, 22 July 2013 -- fixed manifest error
 v0.1.4, 23 July 2013 -- Added login method
 v0.1.5,  2 Aug	2013 -- Added functions to query server for review details
+v0.1.6,  6 Aug	2013 -- Make module login to code collab
