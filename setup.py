@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ccollab_client',
-    version='0.1.6',
+    version='0.1.7',
     author='Shawn Crosby',
     author_email='scrosby@salesforce.com',
     packages=find_packages(),
@@ -11,6 +11,6 @@ setup(
     description='Wrapper for code collab command line',
     long_description=open('README.txt').read(),
     install_requires=[
-                      "sc_pylibs",
+                      "sc_pylibs>0.1.1",
                       ],
 )
