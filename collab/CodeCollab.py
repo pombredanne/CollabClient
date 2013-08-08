@@ -1,5 +1,5 @@
+from ui.Login import Factory
 import subprocess, re, tempfile, sys
-import getpass
 
 class CodeCollabClient:
     '''
@@ -15,6 +15,22 @@ class CodeCollabClient:
             if user is None:
                 self.login()
         
+    def login(self):
+        '''
+        Prompts the user and logs into code collaborator
+        '''
+        if sys.stdin.isatty():
+            login = Factory().get_login('CLI', 'Login to Code Collaborator...')
+        else:
+            login = Factory().get_login('GUI', 'Login to Code Collaborator...')
+
+        login.add_prompt('user', 'Code Collab username', 'TEXT')
+        login.add_prompt('password', 'Code Collab password', 'PASSWORD')
+        user = login.get_value('user')
+        passwd = login.get_value('password')
+        command = ['ccollab', 'login', self.server, user, passwd]
+        subprocess.call(command)
+    
     def create_collab(self, title, overview):
         '''
         Creates a new code review
@@ -137,16 +153,6 @@ class CodeCollabClient:
             command.append(xpath)
         out = subprocess.check_output(command)
         return out
-    
-    def login(self):
-        '''
-        Prompts the user and logs into code collaborator
-        '''
-        sys.stdin = open('/dev/tty')
-        user = raw_input('Enter your Code Collab username: ')
-        passwd = getpass.getpass('Enter your Code Collab password: ')
-        command = ['ccollab', 'login', self.server, user, passwd]
-        subprocess.call(command)
     
     def done(self, reviewid):
         '''

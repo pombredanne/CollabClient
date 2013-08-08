@@ -10,4 +10,7 @@ setup(
     license='Be Real',
     description='Wrapper for code collab command line',
     long_description=open('README.txt').read(),
+    install_requires=[
+                      "sc_pylibs",
+                      ],
 )
