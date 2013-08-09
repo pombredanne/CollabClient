@@ -151,7 +151,11 @@ class CodeCollabClient:
         if xpath is not None:
             command.append('--xpath')
             command.append(xpath)
-        out = subprocess.check_output(command)
+        try:
+            out = subprocess.check_output(command)
+        except:
+            out = None
+            
         return out
     
     def done(self, reviewid):

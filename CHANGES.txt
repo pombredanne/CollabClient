@@ -6,3 +6,4 @@ v0.1.4, 23 July 2013 -- Added login method
 v0.1.5,  2 Aug	2013 -- Added functions to query server for review details
 v0.1.6,  6 Aug	2013 -- Make module login to code collab
 v0.1.7,	 8 Aug	2013 -- Refactor local storage and login
+v0.1.8,  8 Aug  2013 -- Handle invalid code review ids
