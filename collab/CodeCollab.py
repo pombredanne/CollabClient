@@ -7,6 +7,7 @@ class CodeCollabClient:
     with code collaborator
     '''
     def __init__(self, server='https://code-collab.soma.salesforce.com'):
+        print "Code Collab 6.5 command line is very slow, please wait..."
         self.server=server
         user = None
         counter = 0
